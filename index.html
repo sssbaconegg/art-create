@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>창작그림모음</title>
+    <style>
+        body {
+        margin: 0;
+        padding: 40px;
+        background: #f8f8f8;
+        display: flex;
+        justify-content: center;
+        font-family: sans-serif;
+        }
+
+        .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        max-width: 1200px;
+        width: 100%;
+        }
+
+        .gallery img {
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        cursor: zoom-in;
+        }
+
+        /* hover preview layer */
+        .preview-layer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.8);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+        }
+
+        .preview-layer img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery">
+        <img src="./images/1.png" alt="1">
+        <img src="./images/2.png" alt="2">
+        <img src="./images/3.png" alt="3">
+        <img src="./images/4.png" alt="4">
+        <img src="./images/5.png" alt="5">
+        <img src="./images/6.png" alt="6">
+        <img src="./images/7.png" alt="7">
+    </div>
+
+    <!-- Hover Preview Layer -->
+    <div class="preview-layer" id="previewLayer">
+        <img id="previewImage" src="" alt="preview">
+    </div>
+
+    <script>
+        const previewLayer = document.getElementById("previewLayer");
+        const previewImage = document.getElementById("previewImage");
+        const images = document.querySelectorAll(".gallery img");
+
+        images.forEach(img => {
+        img.addEventListener("mouseenter", () => {
+            previewImage.src = img.src;
+            previewLayer.style.display = "flex";
+        });
+
+        img.addEventListener("mouseleave", () => {
+            previewLayer.style.display = "none";
+            previewImage.src = "";
+        });
+        });
+
+        // 만약 previewLayer 위에 올려도 사라지지 않게 하려면 아래처럼 mouseleave만 .gallery에 적용
+    </script>
+</body>
+</html>
